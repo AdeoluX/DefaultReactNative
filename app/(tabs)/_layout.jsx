@@ -5,19 +5,18 @@ import { icons } from "../../constants";
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className="items-center justify-center gap-2">
+    <View style={{alignItems: 'center', justifyContent: 'center', margin: 2}}>
       <Image
         source={icon}
         resizeMode="contain"
         tintColor={color}
-        className="w-6 h-6"
+        style={{width: 30, height: 25}}
       />
-      <Text
-        className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
+      {/* <Text
         style={{ color: color }}
       >
         {name}
-      </Text>
+      </Text> */}
     </View>
   );
 };
@@ -28,13 +27,13 @@ const TabLayout = () => {
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarActiveTintColor: "#FFA001",
-          tabBarInactiveTintColor: "#CDCDE0",
+          tabBarActiveTintColor: "#FFF",
+          tabBarInactiveTintColor: "#929999",
           tabBarStyle: {
-            backgroundColor: "#161622",
+            backgroundColor: "#253334",
             borderTopWidth: 1,
             borderTopColor: "#232533",
-            height: 84,
+            height: 80,
           },
         }}
       >
@@ -45,7 +44,7 @@ const TabLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.home}
+                icon={icons.homeIcon}
                 color={color}
                 name="Home"
                 focused={focused}
@@ -54,15 +53,15 @@ const TabLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="bookmark"
+          name="audio"
           options={{
-            title: "Bookmark",
+            title: "Audio",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.bookmark}
+                icon={icons.soundIcon}
                 color={color}
-                name="Bookmark"
+                name="Audio"
                 focused={focused}
               />
             ),
@@ -75,24 +74,9 @@ const TabLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.plus}
+                icon={icons.userIcon}
                 color={color}
                 name="Create"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: "Profile",
-            headerShown: false,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={icons.profile}
-                color={color}
-                name="Profile"
                 focused={focused}
               />
             ),

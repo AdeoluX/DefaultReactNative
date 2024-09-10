@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Aora",
-    "scheme": "aora",
-    "slug": "aora",
+    "name": "Personal Assistant",
+    "scheme": "personal_assistant",
+    "slug": "personal_assistant",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

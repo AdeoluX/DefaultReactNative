@@ -8,26 +8,38 @@ const FormField = ({
   placeholder,
   handleChangeText,
   otherStyles,
+  containerStyles,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <View className={`space-y-2 ${otherStyles}`}>
-      <Text className="text-base text-gray-100 font-pmedium">{title}</Text>
-      <View className="flex-row border-2 border-black-200 w-full h-16 px-4 bg-black-100 rounded-2xl focus:border-secondary items-center">
+    <View style={{ paddingVertical: 2, ...containerStyles }}>
+      <Text style={{ color: "gray" }}>{title}</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          borderBottomWidth: 2,
+          borderBottomColor: "#BEC2C2",
+          width: "100%",
+          height: 60,
+          paddingHorizontal: 10,
+          alignItems: "center",
+          ...otherStyles
+        }}
+      >
         <TextInput
-          className="flex-1 text-white font-psemibold text-base"
+          style={{ flex: 1, color: "#9378FF", fontWeight: '600', ...props.textStyle }}
           value={value}
           placeholder={placeholder}
-          placeholderTextColor={"#7b7b8b"}
+          placeholderTextColor={"#BEC2C2"}
           onChangeText={handleChangeText}
-          secureTextEntry={title === "Password" && !showPassword}
+          secureTextEntry={(title === "Password" || placeholder?.toLowerCase() === 'password' || placeholder?.toLowerCase() === 'confirm password') && !showPassword}
         />
-        {title === "Password" && (
+        {(title === "Password" || placeholder?.toLowerCase() === 'password' || placeholder?.toLowerCase() === 'confirm password') && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             <Image
               source={!showPassword ? icons.eye : icons.eyeHide}
-              className="w-6 h-6"
+              style={{ width: 30, height: 30, tintColor: '#9378FF' }}
             />
           </TouchableOpacity>
         )}

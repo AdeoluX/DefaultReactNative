@@ -1,58 +1,47 @@
+// import { StyleSheet, Text, View } from 'react-native'
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { ScrollView, Text, View, Image } from "react-native";
+import { useFonts } from "expo-font";
+import { ScrollView, Text, View, Image, StyleSheet, ImageBackground } from "react-native";
 import { Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { images } from "../constants";
-import CustomButtons from "../components/CustomButtons";
 import { useGlobalContext } from "../context/GlobalProvider";
 
-//Use this scrren for oboarding
-export default function App() {
-  const { isLoading, isLoggenIn } = useGlobalContext();
-
-  if (!isLoading && isLoggenIn) return <Redirect href="/home" />;
+const App = () => {
+  const { isLoading, isLoggenIn, splash, setSplash } = useGlobalContext();
+  
+  useEffect(() => {
+    const splasher = async () => {
+      setTimeout(() => setSplash(true), 10000);
+    };
+    splasher();
+  }, []);
+  if(isLoggenIn) return <Redirect href="/home" />
+  else if (splash) return <Redirect href="/Onboarding" />;
   return (
-    <SafeAreaView className="bg-primary h-full">
-      <ScrollView contentContainerStyle={{ height: "100%" }}>
-        <View className="w-full justify-center items-center min-h-[85vh] px-4">
-          <Image
-            source={images.logo}
-            className="w-[130px] h-[84px]"
-            resizeMode="contain"
-          />
-          <Image
-            source={images.cards}
-            className="max-w-[380px] w-full h-[300px]"
-            resizeMode="contain"
-          />
-
-          <View className="relative mt-5">
-            <Text className="text-3xl text-white font-bold text-center">
-              Discover Endless Possibilities with{" "}
-              <Text className="text-secondary-200">Aora</Text>
-            </Text>
-
-            <Image
-              source={images.path}
-              className="w-[136px] h-[15px] absolute -bottom-2 -right-8"
-              resizeMode="contain"
-            />
-          </View>
-
-          <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
-            Where creatively meets innovation: embark on a journey of limitless
-            exploration with Aora
-          </Text>
-
-          <CustomButtons
-            title={"Continue with Email"}
-            handlePress={() => router.push("/sign-in")}
-            containerStyles={"w-full mt-7"}
-          />
-        </View>
-      </ScrollView>
-      <StatusBar backgroundColor="#161622" style="light" />
-    </SafeAreaView>
+    <ScrollView contentContainerStyle={{ height: "100%" }}>
+        <ImageBackground
+        source={images.splashBackground}
+        resize="contain"
+          style={{
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+          }}
+        >
+          <Image source={images.logoImage} style={{width: 300, height: 300}}/>
+        </ImageBackground>
+    </ScrollView>
   );
-}
+};
+
+export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
